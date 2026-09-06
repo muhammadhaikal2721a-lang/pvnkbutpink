@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>YOUR BRAND — Open PO</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #f4f4f4;
+      color: #111;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #111;
+      color: white;
+      padding: 18px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: bold;
+      letter-spacing: 3px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 14px;
+    }
+
+    .hero {
+      min-height: 85vh;
+      padding: 40px 7%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: #ddd;
+    }
+
+    .badge {
+      display: inline-block;
+      width: fit-content;
+      background: #111;
+      color: white;
+      padding: 8px 14px;
+      font-size: 12px;
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(50px, 12vw, 110px);
+      line-height: .9;
+      letter-spacing: 5px;
+    }
+
+    .hero p {
+      margin: 25px 0;
+      max-width: 500px;
+      line-height: 1.7;
+      color: #444;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #111;
+      color: white;
+      padding: 15px 25px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    section {
+      padding: 80px 7%;
+    }
+
+    .section-title {
+      margin-bottom: 40px;
+    }
+
+    .section-title h2 {
+      font-size: 36px;
+    }
+
+    .section-title p {
+      margin-top: 10px;
+      color: #666;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+    }
+
+    .product {
+      background: white;
+      overflow: hidden;
+      transition: .3s;
+    }
+
+    .product:hover {
+      transform: translateY(-5px);
+    }
+
+    .product-image {
+      height: 330px;
+      background: #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 60px;
+    }
+
+    .product-content {
+      padding: 22px;
+    }
+
+    .status {
+      display: inline-block;
+      font-size: 11px;
+      background: #111;
+      color: white;
+      padding: 6px 10px;
+      margin-bottom: 12px;
+    }
+
+    .product h3 {
+      margin-bottom: 8px;
+    }
+
+    .price {
+      font-weight: bold;
+      margin: 15px 0;
+      font-size: 18px;
+    }
+
+    .details {
+      color: #666;
+      font-size: 14px;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .info {
+      background: #111;
+      color: white;
+      text-align: center;
+    }
+
+    .info h2 {
+      font-size: 32px;
+      margin-bottom: 15px;
+    }
+
+    .info p {
+      color: #ccc;
+      max-width: 600px;
+      margin: auto;
+      line-height: 1.8;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 25px;
+    }
+
+    .step {
+      background: white;
+      padding: 25px;
+    }
+
+    .step-number {
+      font-size: 30px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    footer {
+      background: #111;
+      color: #888;
+      text-align: center;
+      padding: 25px;
+      font-size: 13px;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 15px 5%;
+      }
+
+      nav a {
+        margin-left: 8px;
+        font-size: 12px;
+      }
+
+      section {
+        padding: 60px 5%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+
+  <div class="logo">
+    YOUR BRAND
+  </div>
+
+  <nav>
+    <a href="#shop">SHOP</a>
+    <a href="#how">HOW IT WORKS</a>
+    <a href="#about">ABOUT</a>
+  </nav>
+
+</header>
+
+
+<section class="hero">
+
+  <span class="badge">
+    OPEN PRE-ORDER
+  </span>
+
+  <h1>
+    YOUR<br>
+    BRAND
+  </h1>
+
+  <p>
+    Clothing made by us, ordered by you.
+    Setiap koleksi diproduksi berdasarkan jumlah
+    pesanan selama periode Open PO.
+  </p>
+
+  <a href="#shop" class="btn">
+    VIEW COLLECTION
+  </a>
+
+</section>
+
+
+<section id="shop">
+
+  <div class="section-title">
+
+    <h2>
+      CURRENT PO
+    </h2>
+
+    <p>
+      Open PO sampai 10 September 2026
+    </p>
+
+  </div>
+
+
+  <div class="products">
+
+
+    <!-- PRODUK 1 -->
+
+    <div class="product">
+
+      <div class="product-image">
+        👕
+      </div>
+
+      <div class="product-content">
+
+        <span class="status">
+          OPEN PO
+        </span>
+
+        <h3>
+          Oversized Tee #01
+        </h3>
+
+        <div class="price">
+          Rp179.000
+        </div>
+
+        <div class="details">
+
+          Material: Cotton Combed 24s<br>
+          Size: S — XL<br>
+          Estimasi produksi: 14–21 hari
+
+        </div>
+
+        <a
+          class="btn"
+          href="https://wa.me/628xxxxxxxxxx?text=Halo%20saya%20mau%20PO%20Oversized%20Tee%20%2301"
+          target="_blank">
+
+          PRE-ORDER
+
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <!-- PRODUK 2 -->
+
+    <div class="product">
+
+      <div class="product-image">
+        👕
+      </div>
+
+      <div class="product-content">
+
+        <span class="status">
+          OPEN PO
+        </span>
+
+        <h3>
+          Graphic Tee #02
+        </h3>
+
+        <div class="price">
+          Rp199.000
+        </div>
+
+        <div class="details">
+
+          Material: Cotton Combed 24s<br>
+          Size: S — XL<br>
+          Estimasi produksi: 14–21 hari
+
+        </div>
+
+        <a
+          class="btn"
+          href="https://wa.me/628xxxxxxxxxx?text=Halo%20saya%20mau%20PO%20Graphic%20Tee%20%2302"
+          target="_blank">
+
+          PRE-ORDER
+
+        </a>
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+</section>
+
+
+<section class="info">
+
+  <h2>
+    WHY PRE-ORDER?
+  </h2>
+
+  <p>
+    Kami memproduksi berdasarkan jumlah pesanan.
+    Dengan sistem ini, kami bisa mengurangi stok berlebih
+    dan fokus membuat produk sesuai jumlah yang benar-benar
+    dipesan.
+  </p>
+
+</section>
+
+
+<section id="how">
+
+  <div class="section-title">
+
+    <h2>
+      HOW IT WORKS
+    </h2>
+
+    <p>
+      Cara melakukan Pre-Order
+    </p>
+
+  </div>
+
+
+  <div class="steps">
+
+    <div class="step">
+
+      <div class="step-number">
+        01
+      </div>
+
+      <h3>
+        Pilih Produk
+      </h3>
+
+      <p>
+        Pilih koleksi yang sedang Open PO.
+      </p>
+
+    </div>
+
+
+    <div class="step">
+
+      <div class="step-number">
+        02
+      </div>
+
+      <h3>
+        Hubungi Kami
+      </h3>
+
+      <p>
+        Klik tombol Pre-Order dan isi detail pesanan.
+      </p>
+
+    </div>
+
+
+    <div class="step">
+
+      <div class="step-number">
+        03
+      </div>
+
+      <h3>
+        Pembayaran
+      </h3>
+
+      <p>
+        Ikuti instruksi pembayaran yang diberikan.
+      </p>
+
+    </div>
+
+
+    <div class="step">
+
+      <div class="step-number">
+        04
+      </div>
+
+      <h3>
+        Tunggu Produksi
+      </h3>
+
+      <p>
+        Produk dibuat setelah periode PO selesai.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section id="about">
+
+  <div class="section-title">
+
+    <h2>
+      ABOUT US
+    </h2>
+
+  </div>
+
+  <p style="max-width:650px; line-height:1.8;">
+
+    YOUR BRAND adalah independent clothing brand
+    yang dibangun dari sebuah ide sederhana:
+    membuat pakaian yang punya karakter.
+
+    Setiap koleksi dibuat dalam jumlah terbatas
+    melalui sistem Pre-Order.
+
+  </p>
+
+</section>
+
+
+<footer>
+
+  © 2026 YOUR BRAND
+
+</footer>
+
+
+</body>
+</html>
+
