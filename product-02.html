@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Graphic Tee #02 — YOUR BRAND</title>
+
+  <style>
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #f4f4f4;
+  color: #111;
+}
+
+header {
+  background: #111;
+  color: white;
+  padding: 18px 7%;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 3px;
+}
+
+.product-page {
+  max-width: 1100px;
+  margin: 50px auto;
+  padding: 0 7%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  align-items: start;
+}
+
+.product-image {
+  height: 520px;
+  background: #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 90px;
+}
+
+.status {
+  display: inline-block;
+  font-size: 11px;
+  background: #111;
+  color: white;
+  padding: 6px 10px;
+  margin-bottom: 15px;
+  letter-spacing: 1px;
+}
+
+.product-page h1 {
+  font-size: 38px;
+  margin-bottom: 10px;
+}
+
+.price {
+  font-weight: bold;
+  font-size: 22px;
+  margin: 15px 0 30px;
+}
+
+.label {
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  margin: 22px 0 10px;
+}
+
+.sizes {
+  display: flex;
+  gap: 8px;
+}
+
+.size {
+  width: 50px;
+  height: 42px;
+  background: white;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.size:hover {
+  background: #111;
+  color: white;
+}
+
+.quantity {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.quantity button {
+  width: 38px;
+  height: 38px;
+  background: white;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.quantity strong {
+  min-width: 20px;
+  text-align: center;
+}
+
+.info {
+  background: white;
+  padding: 18px;
+  line-height: 1.8;
+  color: #555;
+  font-size: 14px;
+}
+
+/* DATA PEMBELI */
+
+/* ORDER INFO */
+
+.customer-form {
+  margin-top: 26px;
+  padding: 20px;
+  background: #111;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+}
+
+.customer-form h2 {
+  margin: 0 0 20px;
+  color: #fff;
+  font-size: 15px;
+  letter-spacing: 1.5px;
+}
+
+.form-group {
+  margin-bottom: 14px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #aaa;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .3px;
+}
+
+.form-group label span {
+  color: #666;
+  font-weight: 400;
+}
+
+.customer-form input,
+.customer-form textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 11px;
+  background: #181818;
+  color: #fff;
+  border: 1px solid #303030;
+  border-radius: 5px;
+  font-family: inherit;
+  font-size: 13px;
+  outline: none;
+}
+
+.customer-form input::placeholder,
+.customer-form textarea::placeholder {
+  color: #555;
+}
+
+.customer-form input:focus,
+.customer-form textarea:focus {
+  border-color: #666;
+}
+
+.customer-form textarea {
+  min-height: 65px;
+  resize: vertical;
+}
+
+.customer-form + button {
+  width: 100%;
+  margin-top: 14px;
+  padding: 14px;
+  background: #111;
+  color: #fff;
+  border: 1px solid #333;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.customer-form + button:hover {
+  background: #222;
+}
+@media (max-width: 700px) {
+  .product-page {
+    grid-template-columns: 1fr;
+    margin: 30px auto;
+    gap: 30px;
+  }
+
+  .product-image {
+    height: 350px;
+  }
+
+  .product-page h1 {
+    font-size: 30px;
+  }
+}   
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">YOUR BRAND</div>
+</header>
+
+
+<main class="product-page">
+
+  <div class="product-image">
+    👕
+  </div>
+
+  <div>
+
+    <span class="status">OPEN PO</span>
+
+    <h1>Graphic Tee #02</h1>
+
+    <div class="price">Rp179.000</div>
+
+    <div class="label">SIZE</div>
+
+    <div class="sizes">
+      <button class="size" onclick="selectSize('S')">S</button>
+      <button class="size" onclick="selectSize('M')">M</button>
+      <button class="size" onclick="selectSize('L')">L</button>
+      <button class="size" onclick="selectSize('XL')">XL</button>
+    </div>
+
+    <div class="label">JUMLAH</div>
+
+    <div class="quantity">
+      <button onclick="changeQty(-1)">−</button>
+      <strong id="qty">1</strong>
+      <button onclick="changeQty(1)">+</button>
+    </div>
+
+    <div class="label">DETAIL</div>
+
+    <div class="info">
+      Material: Cotton Combed 24s<br>
+      Size: S — XL<br>
+      Estimasi produksi: 14–21 hari
+    </div>
+
+<div class="customer-form">
+  <h2>DATA PEMBELI</h2>
+
+  <div class="form-group">
+    <label for="nama">Nama Lengkap</label>
+    <input type="text" id="nama" placeholder="Masukkan nama lengkap">
+  </div>
+
+  <div class="form-group">
+    <label for="wa">Nomor WhatsApp</label>
+    <input type="tel" id="wa" placeholder="08xxxxxxxxxx">
+  </div>
+
+  <div class="form-group">
+    <label for="alamat">Alamat Lengkap</label>
+    <textarea id="alamat" placeholder="Nama jalan, nomor rumah, RT/RW"></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="kota">Kota / Kabupaten</label>
+    <input type="text" id="kota" placeholder="Contoh: Tangerang">
+  </div>
+
+  <div class="form-group">
+    <label for="kodepos">Kode Pos</label>
+    <input type="text" id="kodepos" placeholder="Contoh: 15154">
+  </div>
+
+  <div class="form-group">
+    <label for="catatan">Catatan <span>(Opsional)</span></label>
+    <textarea id="catatan" placeholder="Tambahkan catatan jika diperlukan"></textarea>
+  </div>
+</div>
+
+<button onclick="order()">PRE-ORDER SEKARANG</button>
+  </div>
+
+</main>
+
+<script>
+let size = "";
+let qty = 1;
+
+function selectSize(value) {
+  size = value;
+}
+
+function changeQty(value) {
+  qty += value;
+
+  if (qty < 1) {
+    qty = 1;
+  }
+
+  document.getElementById("qty").textContent = qty;
+}
+function order() {
+  if (!size) {
+    alert("Pilih ukuran terlebih dahulu.");
+    return;
+  }
+
+  const nama = document.getElementById("nama").value.trim();
+  const wa = document.getElementById("wa").value.trim();
+  const alamat = document.getElementById("alamat").value.trim();
+  const kota = document.getElementById("kota").value.trim();
+  const kodepos = document.getElementById("kodepos").value.trim();
+  const catatan = document.getElementById("catatan").value.trim();
+
+  if (!nama || !wa || !alamat || !kota || !kodepos) {
+    alert("Lengkapi data pembeli terlebih dahulu.");
+    return;
+  }
+
+  const product = "Oversized Tee #01";
+  const price = 179000;
+  const total = price * qty;
+
+  const message =
+`Halo, saya mau pre-order:
+
+Produk: ${product}
+Size: ${size}
+Jumlah: ${qty}
+Total: Rp${total.toLocaleString("id-ID")}
+
+DATA PEMBELI
+Nama: ${nama}
+WhatsApp: ${wa}
+Alamat: ${alamat}
+Kota/Kabupaten: ${kota}
+Kode Pos: ${kodepos}
+Catatan: ${catatan || "-"}`;
+
+  window.location.href =
+    "https://wa.me/628999878277?text=" +
+    encodeURIComponent(message);
+}
+</script>
+
+</body>
+</html>
