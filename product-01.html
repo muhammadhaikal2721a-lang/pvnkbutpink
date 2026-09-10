@@ -324,6 +324,8 @@ function changeQty(value) {
 
   document.getElementById("qty").textContent = qty;
 }
+// ===== MULAI FUNCTION ORDER BARU =====
+
 function order() {
   if (!size) {
     alert("Pilih ukuran terlebih dahulu.");
@@ -346,8 +348,20 @@ function order() {
   const price = 179000;
   const total = price * qty;
 
+  const now = new Date();
+
+  const date =
+    now.getFullYear().toString() +
+    String(now.getMonth() + 1).padStart(2, "0") +
+    String(now.getDate()).padStart(2, "0");
+
+  const invoiceNumber =
+    "INV-" + date + "-" + Math.floor(100 + Math.random() * 900);
+
   const message =
 `Halo, saya mau pre-order:
+
+No. Invoice: ${invoiceNumber}
 
 Produk: ${product}
 Size: ${size}
@@ -362,10 +376,99 @@ Kota/Kabupaten: ${kota}
 Kode Pos: ${kodepos}
 Catatan: ${catatan || "-"}`;
 
-  window.location.href =
-    "https://wa.me/6281323875406?text=" +
-    encodeURIComponent(message);
-}
+  const invoice = `
+    <div style="
+      max-width:600px;
+      margin:40px auto;
+      padding:30px;
+      background:#fff;
+      color:#111;
+      border:1px solid #ddd;
+      font-family:Arial,sans-serif;
+      line-height:1.6;
+    ">
+
+      <h1 style="
+        margin:0;
+        font-size:24px;
+        letter-spacing:2px;
+      ">
+        YOUR BRAND
+      </h1>
+
+      <p style="margin-top:5px;color:#777;">
+        PRE-ORDER INVOICE
+      </p>
+
+      <hr>
+
+      <p>
+        <strong>No. Invoice</strong><br>
+        ${invoiceNumber}
+      </p>
+
+      <h3>PEMBELI</h3>
+
+      <p>
+        Nama: ${nama}<br>
+        WhatsApp: ${wa}<br>
+        Alamat: ${alamat}<br>
+        Kota/Kabupaten: ${kota}<br>
+        Kode Pos: ${kodepos}
+      </p>
+
+      <h3>PESANAN</h3>
+
+      <p>
+        ${product}<br>
+        Size: ${size}<br>
+        Jumlah: ${qty}<br>
+        Harga: Rp${price.toLocaleString("id-ID")}
+      </p>
+
+      <hr>
+
+      <h2>
+        TOTAL: Rp${total.toLocaleString("id-ID")}
+      </h2>
+
+      <p>
+        <strong>STATUS</strong><br>
+        MENUNGGU PEMBAYARAN
+      </p>
+
+      <button onclick="window.location.href='https://wa.me/628999878277?text=' + encodeURIComponent(\`${message}\`)"
+        style="
+          width:100%;
+          padding:14px;
+          background:#111;
+          color:#fff;
+          border:0;
+          cursor:pointer;
+          font-weight:bold;
+        ">
+        LANJUT KE WHATSAPP
+      </button>
+
+      <button onclick="window.print()"
+        style="
+          width:100%;
+          padding:14px;
+          margin-top:10px;
+          background:#fff;
+          color:#111;
+          border:1px solid #111;
+          cursor:pointer;
+          font-weight:bold;
+        ">
+        SIMPAN / CETAK INVOICE
+      </button>
+
+    </div>
+  `;
+
+  document.body.innerHTML = invoice;
+
 </script>
 
 </body>
