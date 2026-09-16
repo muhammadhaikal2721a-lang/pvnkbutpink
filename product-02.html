@@ -124,53 +124,48 @@ header {
   color: #555;
   font-size: 14px;
 }
-
 /* DATA PEMBELI */
 
-/* ORDER INFO */
-
 .customer-form {
-  margin-top: 26px;
-  padding: 20px;
-  background: #111;
-  border: 1px solid #2a2a2a;
-  border-radius: 8px;
+  margin-top: 24px;
+  padding: 18px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
 }
 
 .customer-form h2 {
-  margin: 0 0 20px;
-  color: #fff;
-  font-size: 15px;
-  letter-spacing: 1.5px;
+  margin: 0 0 18px;
+  color: #111;
+  font-size: 16px;
+  letter-spacing: 1px;
 }
 
 .form-group {
-  margin-bottom: 14px;
+  margin-bottom: 13px;
 }
 
 .form-group label {
   display: block;
-  margin-bottom: 5px;
-  color: #aaa;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: .3px;
+  margin-bottom: 6px;
+  color: #333;
+  font-size: 12px;
+  font-weight: 600;
 }
 
 .form-group label span {
-  color: #666;
+  color: #999;
   font-weight: 400;
 }
 
 .customer-form input,
 .customer-form textarea {
   width: 100%;
-  box-sizing: border-box;
-  padding: 10px 11px;
-  background: #181818;
-  color: #fff;
-  border: 1px solid #303030;
-  border-radius: 5px;
+  padding: 11px 12px;
+  background: #fafafa;
+  color: #111;
+  border: 1px solid #ddd;
+  border-radius: 6px;
   font-family: inherit;
   font-size: 13px;
   outline: none;
@@ -178,12 +173,13 @@ header {
 
 .customer-form input::placeholder,
 .customer-form textarea::placeholder {
-  color: #555;
+  color: #aaa;
 }
 
 .customer-form input:focus,
 .customer-form textarea:focus {
-  border-color: #666;
+  background: #fff;
+  border-color: #111;
 }
 
 .customer-form textarea {
@@ -193,12 +189,12 @@ header {
 
 .customer-form + button {
   width: 100%;
-  margin-top: 14px;
-  padding: 14px;
+  margin-top: 12px;
+  padding: 15px;
   background: #111;
   color: #fff;
-  border: 1px solid #333;
-  border-radius: 6px;
+  border: none;
+  border-radius: 7px;
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 1px;
@@ -206,7 +202,7 @@ header {
 }
 
 .customer-form + button:hover {
-  background: #222;
+  background: #333;
 }
 @media (max-width: 700px) {
   .product-page {
@@ -245,7 +241,7 @@ header {
 
     <h1>Graphic Tee #02</h1>
 
-    <div class="price">Rp179.000</div>
+    <div class="price">Rp0</div>
 
     <div class="label">SIZE</div>
 
@@ -267,9 +263,9 @@ header {
     <div class="label">DETAIL</div>
 
     <div class="info">
-      Material: Cotton Combed 24s<br>
-      Size: S — XL<br>
-      Estimasi produksi: 14–21 hari
+      Material: [ISI MATERIAL]<br>
+      Size: [ISI UKURAN]<br>
+      Estimasi produksi: [ISI ESTIMASI PRODUKSI]
     </div>
 
 <div class="customer-form">
@@ -328,6 +324,8 @@ function changeQty(value) {
 
   document.getElementById("qty").textContent = qty;
 }
+// ===== FUNCTION ORDER DESIGN 02 =====
+
 function order() {
   if (!size) {
     alert("Pilih ukuran terlebih dahulu.");
@@ -346,16 +344,28 @@ function order() {
     return;
   }
 
-  const product = "Oversized Tee #01";
-  const price = 179000;
+  const product = "Graphic Tee #02";
+  const price = 0;
   const total = price * qty;
 
+  const now = new Date();
+  const date =
+    now.getFullYear().toString() +
+    String(now.getMonth() + 1).padStart(2, "0") +
+    String(now.getDate()).padStart(2, "0");
+
+  const invoiceNumber =
+    "INV-" + date + "-" + Math.floor(100 + Math.random() * 900);
+
   const message =
-`Halo, saya mau pre-order:
+`Halo, saya mau pre-order.
+
+No. Invoice: ${invoiceNumber}
 
 Produk: ${product}
 Size: ${size}
 Jumlah: ${qty}
+Harga: Rp${price.toLocaleString("id-ID")}
 Total: Rp${total.toLocaleString("id-ID")}
 
 DATA PEMBELI
@@ -364,12 +374,366 @@ WhatsApp: ${wa}
 Alamat: ${alamat}
 Kota/Kabupaten: ${kota}
 Kode Pos: ${kodepos}
-Catatan: ${catatan || "-"}`;
+Catatan: ${catatan || "-"}
 
-  window.location.href =
-    "https://wa.me/628999878277?text=" +
-    encodeURIComponent(message);
+STATUS
+MENUNGGU PEMBAYARAN`;
+
+  const invoice = `
+    <div id="invoicePage" class="invoice-page">
+      <div class="invoice-header">
+        <div>
+          <div class="invoice-brand">YOUR BRAND</div>
+          <div class="invoice-subtitle">PRE-ORDER INVOICE</div>
+        </div>
+        <div class="invoice-number">
+          <span>NO. INVOICE</span>
+          <strong>${invoiceNumber}</strong>
+        </div>
+      </div>
+
+      <div class="invoice-section">
+        <h3>INFORMASI PEMBELI</h3>
+        <div class="invoice-grid">
+          <div><span>Nama</span><strong>${nama}</strong></div>
+          <div><span>WhatsApp</span><strong>${wa}</strong></div>
+          <div class="full"><span>Alamat</span><strong>${alamat}</strong></div>
+          <div><span>Kota / Kabupaten</span><strong>${kota}</strong></div>
+          <div><span>Kode Pos</span><strong>${kodepos}</strong></div>
+        </div>
+      </div>
+
+      <div class="invoice-section">
+        <h3>DETAIL PESANAN</h3>
+        <div class="order-card">
+          <div class="order-product">
+            <div class="order-thumb">👕</div>
+            <div>
+              <strong>${product}</strong>
+              <span>OPEN PO</span>
+            </div>
+          </div>
+          <div class="order-row"><span>Size</span><strong>${size}</strong></div>
+          <div class="order-row"><span>Jumlah</span><strong>${qty}</strong></div>
+          <div class="order-row"><span>Harga Satuan</span><strong>Rp${price.toLocaleString("id-ID")}</strong></div>
+        </div>
+      </div>
+
+      <div class="invoice-section">
+        <h3>RINGKASAN PEMBAYARAN</h3>
+        <div class="payment-row"><span>Subtotal</span><strong>Rp${total.toLocaleString("id-ID")}</strong></div>
+        <div class="payment-row"><span>Ongkir</span><strong>Menyesuaikan</strong></div>
+        <div class="payment-total"><span>TOTAL</span><strong>Rp${total.toLocaleString("id-ID")}</strong></div>
+      </div>
+
+      <div class="invoice-section">
+        <h3>PEMBAYARAN</h3>
+        <div class="payment-box">
+          <div><span>Metode Pembayaran</span><strong>Informasi pembayaran akan diberikan melalui WhatsApp</strong></div>
+          <div><span>Status</span><strong class="status-waiting">MENUNGGU PEMBAYARAN</strong></div>
+        </div>
+      </div>
+
+      <div class="invoice-section">
+        <h3>CATATAN</h3>
+        <div class="note-box">${catatan || "-"}</div>
+      </div>
+
+      <div class="invoice-footer">
+        <strong>TERIMA KASIH SUDAH MELAKUKAN PRE-ORDER</strong>
+        <span>Invoice ini dibuat secara otomatis oleh YOUR BRAND.</span>
+      </div>
+
+      <div class="invoice-actions">
+        <button id="pdfButton">DOWNLOAD INVOICE PDF</button>
+        <button id="waButton">KIRIM INVOICE KE WHATSAPP</button>
+      </div>
+    </div>
+  `;
+
+  const invoiceStyle = `
+    <style id="invoiceStyle">
+      body {
+        background:#f1f1f1;
+        margin:0;
+        color:#111;
+        font-family:Arial,sans-serif;
+      }
+
+      .invoice-page {
+        max-width:760px;
+        margin:30px auto;
+        background:#fff;
+        padding:42px;
+        box-sizing:border-box;
+        border:1px solid #ddd;
+      }
+
+      .invoice-header {
+        display:flex;
+        justify-content:space-between;
+        align-items:flex-start;
+        padding-bottom:25px;
+        border-bottom:2px solid #111;
+      }
+
+      .invoice-brand {
+        font-size:25px;
+        font-weight:800;
+        letter-spacing:3px;
+      }
+
+      .invoice-subtitle {
+        margin-top:7px;
+        color:#777;
+        font-size:11px;
+        letter-spacing:1.5px;
+      }
+
+      .invoice-number {
+        text-align:right;
+        font-size:11px;
+      }
+
+      .invoice-number span,
+      .invoice-grid span,
+      .order-row span,
+      .payment-row span,
+      .payment-box span {
+        display:block;
+        color:#777;
+        font-size:10px;
+        text-transform:uppercase;
+        letter-spacing:.7px;
+      }
+
+      .invoice-number strong {
+        display:block;
+        margin-top:5px;
+        font-size:13px;
+      }
+
+      .invoice-section {
+        margin-top:28px;
+      }
+
+      .invoice-section h3 {
+        margin:0 0 12px;
+        font-size:11px;
+        letter-spacing:1.5px;
+      }
+
+      .invoice-grid {
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:12px 25px;
+        padding:16px;
+        background:#f7f7f7;
+      }
+
+      .invoice-grid .full {
+        grid-column:1 / -1;
+      }
+
+      .invoice-grid strong {
+        display:block;
+        margin-top:4px;
+        font-size:13px;
+        font-weight:600;
+      }
+
+      .order-card {
+        border:1px solid #ddd;
+      }
+
+      .order-product {
+        display:flex;
+        align-items:center;
+        gap:14px;
+        padding:16px;
+        background:#f7f7f7;
+      }
+
+      .order-thumb {
+        width:58px;
+        height:58px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        background:#ddd;
+        font-size:27px;
+      }
+
+      .order-product strong {
+        display:block;
+        font-size:14px;
+      }
+
+      .order-product span {
+        display:block;
+        margin-top:5px;
+        font-size:10px;
+        color:#777;
+        letter-spacing:1px;
+      }
+
+      .order-row,
+      .payment-row,
+      .payment-total {
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        padding:12px 16px;
+        border-top:1px solid #eee;
+      }
+
+      .order-row strong,
+      .payment-row strong {
+        font-size:13px;
+      }
+
+      .payment-total {
+        margin-top:6px;
+        padding:18px 16px;
+        background:#111;
+        color:#fff;
+      }
+
+      .payment-total span {
+        font-size:11px;
+        letter-spacing:1px;
+      }
+
+      .payment-total strong {
+        font-size:20px;
+      }
+
+      .payment-box {
+        display:grid;
+        gap:15px;
+        padding:16px;
+        background:#f7f7f7;
+      }
+
+      .payment-box strong {
+        display:block;
+        margin-top:5px;
+        font-size:13px;
+      }
+
+      .status-waiting {
+        letter-spacing:1px;
+      }
+
+      .note-box {
+        padding:15px;
+        min-height:25px;
+        background:#f7f7f7;
+        color:#555;
+        font-size:13px;
+      }
+
+      .invoice-footer {
+        display:flex;
+        flex-direction:column;
+        gap:6px;
+        margin-top:32px;
+        padding-top:20px;
+        border-top:1px solid #ddd;
+        font-size:10px;
+        color:#777;
+      }
+
+      .invoice-footer strong {
+        color:#111;
+        letter-spacing:1px;
+      }
+
+      .invoice-actions {
+        display:grid;
+        gap:10px;
+        margin-top:28px;
+      }
+
+      .invoice-actions button {
+        width:100%;
+        padding:15px;
+        border:0;
+        background:#111;
+        color:#fff;
+        font-size:12px;
+        font-weight:700;
+        letter-spacing:1px;
+        cursor:pointer;
+      }
+
+      .invoice-actions button + button {
+        background:#fff;
+        color:#111;
+        border:1px solid #111;
+      }
+
+      @media (max-width:700px) {
+        .invoice-page {
+          margin:0;
+          padding:24px 18px;
+          border:0;
+        }
+
+        .invoice-header {
+          gap:18px;
+          flex-direction:column;
+        }
+
+        .invoice-number {
+          text-align:left;
+        }
+
+        .invoice-grid {
+          grid-template-columns:1fr;
+        }
+
+        .invoice-grid .full {
+          grid-column:auto;
+        }
+      }
+
+      @media print {
+        body { background:#fff; }
+        .invoice-page {
+          max-width:none;
+          margin:0;
+          border:0;
+          padding:0;
+        }
+        .invoice-actions { display:none !important; }
+      }
+    </style>
+  `;
+
+  document.body.innerHTML = invoiceStyle + invoice;
+
+  document.getElementById("waButton").onclick = function() {
+    window.location.href =
+      "https://wa.me/628999878277?text=" +
+      encodeURIComponent(message);
+  };
+
+  document.getElementById("pdfButton").onclick = function() {
+    const html = document.documentElement.outerHTML;
+    const blob = new Blob([html], { type: "text/html" });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = invoiceNumber + ".html";
+    a.click();
+
+    URL.revokeObjectURL(url);
+    alert("Invoice tersimpan. Untuk PDF, buka file ini lalu pilih Cetak > Simpan sebagai PDF.");
+  };
 }
+
 </script>
 
 </body>
