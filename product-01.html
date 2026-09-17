@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6SNNXQG7EF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-6SNNXQG7EF');
+</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Oversized Tee #01 — YOUR BRAND</title>
@@ -219,7 +228,93 @@ header {
     font-size: 30px;
   }
 }   
-  </style>
+      /* KONFIRMASI PESANAN */
+
+#confirmationOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  z-index: 9999;
+}
+
+.confirmation-card {
+  width: 100%;
+  max-width: 430px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: #fff;
+  color: #111;
+  border-radius: 12px;
+  padding: 22px;
+  box-sizing: border-box;
+  box-shadow: 0 20px 50px rgba(0,0,0,.25);
+}
+
+.confirmation-card h2 {
+  margin: 0 0 18px;
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+
+.confirmation-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 13px;
+}
+
+.confirmation-item span {
+  color: #777;
+}
+
+.confirmation-item strong {
+  text-align: right;
+  max-width: 65%;
+  word-break: break-word;
+}
+
+.confirmation-total {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 18px;
+  padding-top: 15px;
+  border-top: 2px solid #111;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.confirmation-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.confirmation-buttons button {
+  flex: 1;
+  padding: 14px 10px;
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-back {
+  background: #fff;
+  color: #111;
+  border: 1px solid #ccc;
+}
+
+.btn-confirm {
+  background: #111;
+  color: #fff;
+  border: 1px solid #111;
+} </style>
 </head>
 
 <body>
@@ -325,8 +420,156 @@ function changeQty(value) {
   document.getElementById("qty").textContent = qty;
 }
 // ===== MULAI FUNCTION ORDER BARU =====
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+let pendingOrder = null;
 
 function order() {
+  if (!size) {
+    alert("Pilih ukuran terlebih dahulu.");
+    return;
+  }
+
+  const nama = document.getElementById("nama").value.trim();
+  const wa = document.getElementById("wa").value.trim();
+  const alamat = document.getElementById("alamat").value.trim();
+  const kota = document.getElementById("kota").value.trim();
+  const kodepos = document.getElementById("kodepos").value.trim();
+  const catatan = document.getElementById("catatan").value.trim();
+
+  if (!nama || !wa || !alamat || !kota || !kodepos) {
+    alert("Lengkapi data pembeli terlebih dahulu.");
+    return;
+  }
+
+  const product = "Oversized Tee #01";
+  const price = 179000;
+  const total = price * qty;
+
+  pendingOrder = {
+    nama,
+    wa,
+    alamat,
+    kota,
+    kodepos,
+    catatan,
+    product,
+    price,
+    total,
+    size,
+    qty
+  };
+
+  showConfirmation();
+}
+
+function showConfirmation() {
+  const data = pendingOrder;
+
+  const oldOverlay = document.getElementById("confirmationOverlay");
+  if (oldOverlay) oldOverlay.remove();
+
+  const overlay = document.createElement("div");
+  overlay.id = "confirmationOverlay";
+
+  overlay.innerHTML = `
+    <div class="confirmation-card">
+
+      <h2>KONFIRMASI PESANAN</h2>
+
+      <div class="confirmation-item">
+        <span>Produk</span>
+        <strong>${escapeHtml(data.product)}</strong>
+      </div>
+
+      <div class="confirmation-item">
+        <span>Size</span>
+        <strong>${escapeHtml(data.size)}</strong>
+      </div>
+
+      <div class="confirmation-item">
+        <span>Jumlah</span>
+        <strong>${data.qty}</strong>
+      </div>
+
+      <div class="confirmation-item">
+        <span>Harga</span>
+        <strong>Rp${data.price.toLocaleString("id-ID")}</strong>
+      </div>
+
+      <div class="confirmation-item">
+        <span>Nama</span>
+        <strong>${escapeHtml(data.nama)}</strong>
+      </div>
+
+      <div class="confirmation-item">
+        <span>WhatsApp</span>
+        <strong>${escapeHtml(data.wa)}</strong>
+      </div>
+
+      <div class="confirmation-item">
+        <span>Alamat</span>
+        <strong>${escapeHtml(data.alamat)}</strong>
+      </div>
+
+      <div class="confirmation-item">
+        <span>Kota</span>
+        <strong>${escapeHtml(data.kota)}</strong>
+      </div>
+
+      <div class="confirmation-item">
+        <span>Kode Pos</span>
+        <strong>${escapeHtml(data.kodepos)}</strong>
+      </div>
+
+      <div class="confirmation-item">
+        <span>Catatan</span>
+        <strong>${escapeHtml(data.catatan || "-")}</strong>
+      </div>
+
+      <div class="confirmation-total">
+        <span>TOTAL</span>
+        <strong>Rp${data.total.toLocaleString("id-ID")}</strong>
+      </div>
+
+      <div class="confirmation-buttons">
+        <button class="btn-back" onclick="closeConfirmation()">
+          KEMBALI
+        </button>
+
+        <button class="btn-confirm" onclick="confirmOrder()">
+          KONFIRMASI
+        </button>
+      </div>
+
+    </div>
+  `;
+
+  document.body.appendChild(overlay);
+}
+
+function closeConfirmation() {
+  const overlay = document.getElementById("confirmationOverlay");
+
+  if (overlay) {
+    overlay.remove();
+  }
+}
+
+function confirmOrder() {
+  if (!pendingOrder) return;
+
+  closeConfirmation();
+  generateInvoice();
+}
+function generateInvoice() {
   if (!size) {
     alert("Pilih ukuran terlebih dahulu.");
     return;
@@ -708,6 +951,93 @@ MENUNGGU PEMBAYARAN`;
         }
         .invoice-actions { display:none !important; }
       }
+/* ===== KONFIRMASI PESANAN ===== */
+
+#confirmationOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  z-index: 9999;
+}
+
+.confirmation-card {
+  width: 100%;
+  max-width: 430px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: #fff;
+  color: #111;
+  border-radius: 12px;
+  padding: 22px;
+  box-sizing: border-box;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+}
+
+.confirmation-card h2 {
+  margin: 0 0 18px;
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+
+.confirmation-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 13px;
+}
+
+.confirmation-item span {
+  color: #777;
+}
+
+.confirmation-item strong {
+  text-align: right;
+  max-width: 65%;
+  word-break: break-word;
+}
+
+.confirmation-total {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 18px;
+  padding-top: 15px;
+  border-top: 2px solid #111;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.confirmation-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.confirmation-buttons button {
+  flex: 1;
+  padding: 14px 10px;
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-back {
+  background: #fff;
+  color: #111;
+  border: 1px solid #ccc;
+}
+
+.btn-confirm {
+  background: #111;
+  color: #fff;
+  border: 1px solid #111;
+}
     </style>
   `;
 
